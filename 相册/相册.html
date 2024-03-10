@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相册</title>
+    <style>
+      #app{
+        position: absolute;
+      }
+      .boxs{
+        position:absolute;
+        width: 1000px;
+        height: 600px;
+        border:2px solid black;
+        left:300px;
+        top:100px;
+        display:flex;
+      }
+      .img{
+        width: 350px;
+        margin:20px 60px;
+      }
+      .boxs1{
+        position:relative;
+      }
+      .boxs2{
+        position:absolute;
+      }
+      .boxs3{
+        position:absolute;
+      }
+
+      .btn1{
+        position: relative;
+        left:150px;
+        top:400px;
+        width: 100px;
+        height: 50px;
+      }
+      .btn2{
+        position:relative;
+        left:1250px;
+        top:400px;
+        width: 100px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+
+      <div class="boxs">  <!--页面-->
+
+        <div class="boxs1" v-show="isShow1"> <!--第一页-->
+
+          <div class="boxs1_1">
+            <img  class="img" v-for="(item,index) in imgUrl1_1" :src="item.url" alt="照片" :key="item.id">
+          </div>
+
+          <div class="boxs1_2">
+            <img  class="img" v-for="(item,index) in imgUrl1_2" :src="item.url" alt="照片" :key="item.id">
+          </div>
+
+        </div>
+
+        
+        <div class="boxs2" v-show="isShow2"> <!--第二页-->
+
+          <div class="boxs2_1">
+            <img class="img" v-for="(item,index) in imgUrl2_1" :src="item.url" alt="照片" :key="item.id">
+          </div>
+
+          <div class="boxs2_2">
+            <img class="img" v-for="(item,index) in imgUrl2_2" :src="item.url" alt="照片" :key="item.id">
+          </div>
+
+        </div>
+
+        <div class="boxs3" v-show="isShow3"> <!--第三页-->
+
+          <div class="boxs3_1">
+            <img class="img" v-for="(item,index) in imgUrl3_1" :src="item.url" alt="照片" :key="item.id">
+          </div>
+
+          <div class="boxs3_2">
+            <img class="img" v-for="(item,index) in imgUrl3_2" :src="item.url" alt="照片" :key="item.id">
+          </div>
+
+        </div>
+     
+
+      </div>
+
+      <div class="other">
+        <button class="btn1" @click="page_up">⬅</button>
+        <button class="btn2" @click="page_down">➡</button>
+      </div>
+
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+      const app = new Vue({
+        el:"#app",
+        data:{
+          isShow1:true,
+          isShow2:false,
+          isShow3:false,
+
+          imgUrl1_1:[
+            {
+              id:1,
+              url:"img/1.jpg",
+            },
+            {
+              id:2,
+              url:'img/2.jpg',
+            },
+          ],
+          imgUrl1_2:[
+            {
+              id:1,
+              url:'img/3.jpg',
+            },
+            {
+              id:2,
+              url:'img/4.jpg',
+            }
+          ],
+          imgUrl2_1:[
+            {
+              id:1,
+              url:"img/5.jpg",
+            },
+            {
+              id:2,
+              url:"img/6.jpg",
+            },
+          ],
+          imgUrl2_2:[
+            {
+              id:1,
+              url:"img/7.jpg",
+            },
+            {
+              id:2,
+              url:"img/8.jpg",
+            },
+          ],
+          imgUrl3_1:[
+            {
+              id:1,
+              url:"img/9.jpg",
+            },
+            {
+              id:2,
+              url:"img/10.jpg",
+            },
+          ],
+          imgUrl3_2:[
+            {
+              id:1,
+              url:"img/11.jpg",
+            },
+            {
+              id:2,
+              url:"img/12.jpg",
+            },
+          ],
+        },
+        methods:{
+          page_down:function () {
+            if(this.isShow1 == true){
+              this.isShow1 = !this.isShow1;
+              this.isShow2 = !this.isShow2;
+              this.isShow3;
+            }else if(this.isShow2 == true){
+              this.isShow1;
+              this.isShow2 = !this.isShow2;
+              this.isShow3 = !this.isShow3;
+            }else{
+              alert('已经是最后一页啦！！！');
+            }
+            
+          },
+          page_up:function () {
+            if(this.isShow2 == true){
+              this.isShow1 = !this.isShow1;
+              this.isShow2 = !this.isShow2;
+              this.isShow3;
+            }else if(this.isShow3 == true){
+              this.isShow1;
+              this.isShow2 = !this.isShow2;
+              this.isShow3 = !this.isShow3;
+            }else{
+              alert('这是第一页哦！！！');
+            }
+          },
+        }
+      })
+    </script>
+  </body>
+</html>
